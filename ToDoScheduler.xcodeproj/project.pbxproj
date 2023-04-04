@@ -7,22 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA3C29DB9D55006BF12E /* Taskstruct.swift */; };
+		212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */; };
+		212AEA4129DBA4B3006BF12E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA4029DBA4B3006BF12E /* CalendarView.swift */; };
 		2160D07C298ED181001CB322 /* ToDoSchedulerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */; };
 		2160D07E298ED181001CB322 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D07D298ED181001CB322 /* ContentView.swift */; };
 		2160D080298ED183001CB322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2160D07F298ED183001CB322 /* Assets.xcassets */; };
 		2160D083298ED183001CB322 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2160D082298ED183001CB322 /* Preview Assets.xcassets */; };
-		2160D08A298ED3A5001CB322 /* SchedulerStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D089298ED3A5001CB322 /* SchedulerStruct.swift */; };
-		2160D08C298ED3F6001CB322 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D08B298ED3F6001CB322 /* Scheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		212AEA3C29DB9D55006BF12E /* Taskstruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taskstruct.swift; sourceTree = "<group>"; };
+		212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segmentstruct.swift; sourceTree = "<group>"; };
+		212AEA4029DBA4B3006BF12E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		2160D078298ED181001CB322 /* ToDoScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSchedulerApp.swift; sourceTree = "<group>"; };
 		2160D07D298ED181001CB322 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2160D07F298ED183001CB322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2160D082298ED183001CB322 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2160D089298ED3A5001CB322 /* SchedulerStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerStruct.swift; sourceTree = "<group>"; };
-		2160D08B298ED3F6001CB322 /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		212AEA3929DB9CCC006BF12E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		212AEA3A29DB9CD7006BF12E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				212AEA3C29DB9D55006BF12E /* Taskstruct.swift */,
+				212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212AEA3B29DB9CE1006BF12E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2160D07D298ED181001CB322 /* ContentView.swift */,
+				212AEA4029DBA4B3006BF12E /* CalendarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2160D06F298ED181001CB322 = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */,
-				2160D07D298ED181001CB322 /* ContentView.swift */,
-				2160D089298ED3A5001CB322 /* SchedulerStruct.swift */,
-				2160D08B298ED3F6001CB322 /* Scheduler.swift */,
+				212AEA3929DB9CCC006BF12E /* Resources */,
+				212AEA3A29DB9CD7006BF12E /* Model */,
+				212AEA3B29DB9CE1006BF12E /* Views */,
 				2160D07F298ED183001CB322 /* Assets.xcassets */,
 				2160D081298ED183001CB322 /* Preview Content */,
 			);
@@ -143,10 +170,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2160D08A298ED3A5001CB322 /* SchedulerStruct.swift in Sources */,
-				2160D08C298ED3F6001CB322 /* Scheduler.swift in Sources */,
+				212AEA4129DBA4B3006BF12E /* CalendarView.swift in Sources */,
 				2160D07E298ED181001CB322 /* ContentView.swift in Sources */,
 				2160D07C298ED181001CB322 /* ToDoSchedulerApp.swift in Sources */,
+				212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */,
+				212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
