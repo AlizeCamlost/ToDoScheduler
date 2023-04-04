@@ -10,6 +10,7 @@
 		212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA3C29DB9D55006BF12E /* Taskstruct.swift */; };
 		212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */; };
 		212AEA4129DBA4B3006BF12E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA4029DBA4B3006BF12E /* CalendarView.swift */; };
+		212AEA4529DBA940006BF12E /* TaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AEA4429DBA940006BF12E /* TaskData.swift */; };
 		2160D07C298ED181001CB322 /* ToDoSchedulerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */; };
 		2160D07E298ED181001CB322 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D07D298ED181001CB322 /* ContentView.swift */; };
 		2160D080298ED183001CB322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2160D07F298ED183001CB322 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		212AEA3C29DB9D55006BF12E /* Taskstruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taskstruct.swift; sourceTree = "<group>"; };
 		212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segmentstruct.swift; sourceTree = "<group>"; };
 		212AEA4029DBA4B3006BF12E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		212AEA4429DBA940006BF12E /* TaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskData.swift; sourceTree = "<group>"; };
 		2160D078298ED181001CB322 /* ToDoScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoSchedulerApp.swift; sourceTree = "<group>"; };
 		2160D07D298ED181001CB322 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				212AEA3C29DB9D55006BF12E /* Taskstruct.swift */,
 				212AEA3E29DB9EE5006BF12E /* Segmentstruct.swift */,
+				212AEA4429DBA940006BF12E /* TaskData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			files = (
 				212AEA4129DBA4B3006BF12E /* CalendarView.swift in Sources */,
 				2160D07E298ED181001CB322 /* ContentView.swift in Sources */,
+				212AEA4529DBA940006BF12E /* TaskData.swift in Sources */,
 				2160D07C298ED181001CB322 /* ToDoSchedulerApp.swift in Sources */,
 				212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */,
 				212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */,
