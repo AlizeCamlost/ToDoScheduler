@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Segmentstruct: Identifiable{
-    var id: Int
-    var taskId: Int
-    var startTime: Date
-    var endTime: Date
+struct Segmentstruct: Hashable, Codable, Identifiable{
+    var id = UUID()
+    var taskId: Int = 0
+    var startTime: Date = Date()
+    var endTime: Date = Date()
 }

@@ -8,13 +8,31 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject var taskData: Tasks
+    
+    var tasklist:[Taskstruct]{
+        taskData.tasklist
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List{
+                ForEach(tasklist){ task in
+                    TaskRow(task: task)
+                }
+            }
+            Button(action: {
+                taskData.saveData()
+            }, label: {
+                Text("Save Data")
+            })
+        }
     }
 }
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
+            .environmentObject(Tasks())
     }
 }

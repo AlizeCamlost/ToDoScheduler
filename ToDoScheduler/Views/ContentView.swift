@@ -20,13 +20,16 @@ struct ContentView: View {
                     Text("Schedule")
                 })
                 .tag(0)
-            Text("New Task Info")
+            VStack {
+                Text("New Task Info")
+                AddTask()
+            }
                 .font(.title)
                 .tabItem({
                     Image(systemName: "calendar.badge.plus")
                     Text("Add New")
                 })
-                .tag(1)
+            .tag(1)
             Text("Profile & Statistics & Settings")
                 .font(.title)
                 .tabItem({
@@ -41,5 +44,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Tasks())
     }
 }

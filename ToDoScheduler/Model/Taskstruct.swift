@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Taskstruct: Identifiable{
-    var id: Int
-    var taskname: String
-    var deadline: Date
-    var estimatedCost: Int
-    var importance: Int
-    var description: String
+struct Taskstruct: Hashable, Codable, Identifiable{
+    var id = UUID()
+    var taskname: String = ""
+    var deadline: Date = Date()
+    var estimatedCost: Int = 0
+    //var importance: Int
+    //var description: String
     
-    var segments: [Segmentstruct]
+    var segmentsId: [Int] = []
 }
