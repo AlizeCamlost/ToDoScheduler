@@ -12,7 +12,7 @@ struct TaskRow: View {
     
     var body: some View {
         VStack {
-            Text(String(task.id))
+            Text(task.taskname)
             Text(task.description)
         }
     }

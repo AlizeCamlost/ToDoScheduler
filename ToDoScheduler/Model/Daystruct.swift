@@ -9,8 +9,9 @@ import Foundation
 
 struct Daystruct: Hashable, Codable, Identifiable{
     var id = UUID()
-    var date: String = ""
-    var periodEmpty = [Bool](repeating: true, count: 6)  // day's empty slots
+    var date: Date
     
-    var schedule = [Segmentstruct](repeating: Segmentstruct(), count: 6)
+    var timeSlot: [Bool] = [Bool](repeating: false, count: 48)  // all available time, in half hour
+    var schedule: [Bool] = [Bool](repeating: false, count: 48)  // occupied time, in half hour
+    var segmentsId: [Int] = []                                  // the day's segments
 }
