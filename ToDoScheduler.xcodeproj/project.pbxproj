@@ -25,6 +25,24 @@
 		21D0CEFB29F696BA00073597 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CEFA29F696BA00073597 /* UserSettingView.swift */; };
 		21D0CEFF29F6D62800073597 /* ExtentionForUserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CEFE29F6D62800073597 /* ExtentionForUserSettingView.swift */; };
 		21D0CF0329F6D78F00073597 /* AddWorkDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0229F6D78F00073597 /* AddWorkDay.swift */; };
+		21D0CF0529F6E59600073597 /* CalendarViewFromVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0429F6E59600073597 /* CalendarViewFromVC.swift */; };
+		21D0CF0829F6E6AD00073597 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0729F6E6AD00073597 /* ViewController.swift */; };
+		21D0CF1129F6EBD000073597 /* CalendarUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0929F6EBCF00073597 /* CalendarUseCase.swift */; };
+		21D0CF1229F6EBD000073597 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0A29F6EBCF00073597 /* CalendarViewController.swift */; };
+		21D0CF1329F6EBD000073597 /* EditRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0B29F6EBCF00073597 /* EditRoutineViewController.swift */; };
+		21D0CF1429F6EBD000073597 /* DateItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0C29F6EBCF00073597 /* DateItems.swift */; };
+		21D0CF1529F6EBD000073597 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0D29F6EBCF00073597 /* Routine.swift */; };
+		21D0CF1629F6EBD000073597 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0E29F6EBCF00073597 /* CalendarPresenter.swift */; };
+		21D0CF1729F6EBD000073597 /* TaskTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF0F29F6EBD000073597 /* TaskTimeLine.swift */; };
+		21D0CF1829F6EBD000073597 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF1029F6EBD000073597 /* CalendarController.swift */; };
+		21D0CF1E29F6EC8300073597 /* SetWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF1929F6EC8300073597 /* SetWeekCell.swift */; };
+		21D0CF1F29F6EC8300073597 /* WeekDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF1A29F6EC8300073597 /* WeekDayCell.swift */; };
+		21D0CF2029F6EC8300073597 /* RoutineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF1B29F6EC8300073597 /* RoutineCell.swift */; };
+		21D0CF2129F6EC8300073597 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D0CF1C29F6EC8300073597 /* Main.storyboard */; };
+		21D0CF2229F6EC8300073597 /* WeekDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0CF1D29F6EC8300073597 /* WeekDayCell.xib */; };
+		21D0CF2429F6ECBD00073597 /* RoutineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D0CF2329F6ECBD00073597 /* RoutineCell.xib */; };
+		21D0CF2829F6F64A00073597 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D0CF2729F6F64A00073597 /* Storyboard.storyboard */; };
+		21D0CF2A29F6F71600073597 /* ViewController1111.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CF2929F6F71600073597 /* ViewController1111.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +65,24 @@
 		21D0CEFA29F696BA00073597 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
 		21D0CEFE29F6D62800073597 /* ExtentionForUserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionForUserSettingView.swift; sourceTree = "<group>"; };
 		21D0CF0229F6D78F00073597 /* AddWorkDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkDay.swift; sourceTree = "<group>"; };
+		21D0CF0429F6E59600073597 /* CalendarViewFromVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewFromVC.swift; sourceTree = "<group>"; };
+		21D0CF0729F6E6AD00073597 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		21D0CF0929F6EBCF00073597 /* CalendarUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUseCase.swift; sourceTree = "<group>"; };
+		21D0CF0A29F6EBCF00073597 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		21D0CF0B29F6EBCF00073597 /* EditRoutineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRoutineViewController.swift; sourceTree = "<group>"; };
+		21D0CF0C29F6EBCF00073597 /* DateItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateItems.swift; sourceTree = "<group>"; };
+		21D0CF0D29F6EBCF00073597 /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		21D0CF0E29F6EBCF00073597 /* CalendarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		21D0CF0F29F6EBD000073597 /* TaskTimeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTimeLine.swift; sourceTree = "<group>"; };
+		21D0CF1029F6EBD000073597 /* CalendarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		21D0CF1929F6EC8300073597 /* SetWeekCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetWeekCell.swift; sourceTree = "<group>"; };
+		21D0CF1A29F6EC8300073597 /* WeekDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekDayCell.swift; sourceTree = "<group>"; };
+		21D0CF1B29F6EC8300073597 /* RoutineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineCell.swift; sourceTree = "<group>"; };
+		21D0CF1C29F6EC8300073597 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		21D0CF1D29F6EC8300073597 /* WeekDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeekDayCell.xib; sourceTree = "<group>"; };
+		21D0CF2329F6ECBD00073597 /* RoutineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutineCell.xib; sourceTree = "<group>"; };
+		21D0CF2729F6F64A00073597 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		21D0CF2929F6F71600073597 /* ViewController1111.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController1111.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +128,7 @@
 				2142B15229ED67E900365877 /* AddTask.swift */,
 				21D0CEFA29F696BA00073597 /* UserSettingView.swift */,
 				21D0CF0229F6D78F00073597 /* AddWorkDay.swift */,
+				21D0CF0429F6E59600073597 /* CalendarViewFromVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				2160D07B298ED181001CB322 /* ToDoSchedulerApp.swift */,
+				21D0CF0629F6E67600073597 /* fromStoryboard */,
 				212AEA3929DB9CCC006BF12E /* Resources */,
 				212AEA3A29DB9CD7006BF12E /* Model */,
 				212AEA3B29DB9CE1006BF12E /* Views */,
@@ -131,6 +169,30 @@
 				2160D082298ED183001CB322 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		21D0CF0629F6E67600073597 /* fromStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				21D0CF2329F6ECBD00073597 /* RoutineCell.xib */,
+				21D0CF1C29F6EC8300073597 /* Main.storyboard */,
+				21D0CF1B29F6EC8300073597 /* RoutineCell.swift */,
+				21D0CF1929F6EC8300073597 /* SetWeekCell.swift */,
+				21D0CF1A29F6EC8300073597 /* WeekDayCell.swift */,
+				21D0CF1D29F6EC8300073597 /* WeekDayCell.xib */,
+				21D0CF1029F6EBD000073597 /* CalendarController.swift */,
+				21D0CF0E29F6EBCF00073597 /* CalendarPresenter.swift */,
+				21D0CF0929F6EBCF00073597 /* CalendarUseCase.swift */,
+				21D0CF0A29F6EBCF00073597 /* CalendarViewController.swift */,
+				21D0CF0C29F6EBCF00073597 /* DateItems.swift */,
+				21D0CF0B29F6EBCF00073597 /* EditRoutineViewController.swift */,
+				21D0CF0D29F6EBCF00073597 /* Routine.swift */,
+				21D0CF0F29F6EBD000073597 /* TaskTimeLine.swift */,
+				21D0CF0729F6E6AD00073597 /* ViewController.swift */,
+				21D0CF2729F6F64A00073597 /* Storyboard.storyboard */,
+				21D0CF2929F6F71600073597 /* ViewController1111.swift */,
+			);
+			path = fromStoryboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,12 +253,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D0CF2129F6EC8300073597 /* Main.storyboard in Resources */,
+				21D0CF2429F6ECBD00073597 /* RoutineCell.xib in Resources */,
 				2160D083298ED183001CB322 /* Preview Assets.xcassets in Resources */,
+				21D0CF2229F6EC8300073597 /* WeekDayCell.xib in Resources */,
 				2142B15929EDA67000365877 /* routinelistData.json in Resources */,
 				2142B15D29EDC3FA00365877 /* segmentlistData.json in Resources */,
 				2160D080298ED183001CB322 /* Assets.xcassets in Resources */,
 				2142B15B29EDAAC300365877 /* globalStore.json in Resources */,
 				2142B14F29ED319900365877 /* tasklistData.json in Resources */,
+				21D0CF2829F6F64A00073597 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,16 +273,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D0CF1229F6EBD000073597 /* CalendarViewController.swift in Sources */,
 				21D0CEFB29F696BA00073597 /* UserSettingView.swift in Sources */,
+				21D0CF1429F6EBD000073597 /* DateItems.swift in Sources */,
+				21D0CF1E29F6EC8300073597 /* SetWeekCell.swift in Sources */,
 				212AEA4129DBA4B3006BF12E /* CalendarView.swift in Sources */,
+				21D0CF1529F6EBD000073597 /* Routine.swift in Sources */,
 				2160D07E298ED181001CB322 /* ContentView.swift in Sources */,
 				2142B15729EDA30D00365877 /* Daystruct.swift in Sources */,
+				21D0CF1829F6EBD000073597 /* CalendarController.swift in Sources */,
+				21D0CF1329F6EBD000073597 /* EditRoutineViewController.swift in Sources */,
+				21D0CF1629F6EBD000073597 /* CalendarPresenter.swift in Sources */,
+				21D0CF0829F6E6AD00073597 /* ViewController.swift in Sources */,
 				212AEA4529DBA940006BF12E /* TaskData.swift in Sources */,
 				2160D07C298ED181001CB322 /* ToDoSchedulerApp.swift in Sources */,
+				21D0CF1F29F6EC8300073597 /* WeekDayCell.swift in Sources */,
+				21D0CF1129F6EBD000073597 /* CalendarUseCase.swift in Sources */,
+				21D0CF2A29F6F71600073597 /* ViewController1111.swift in Sources */,
 				2142B15329ED67E900365877 /* AddTask.swift in Sources */,
 				21D0CEFF29F6D62800073597 /* ExtentionForUserSettingView.swift in Sources */,
+				21D0CF0529F6E59600073597 /* CalendarViewFromVC.swift in Sources */,
+				21D0CF2029F6EC8300073597 /* RoutineCell.swift in Sources */,
 				212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */,
 				21D0CF0329F6D78F00073597 /* AddWorkDay.swift in Sources */,
+				21D0CF1729F6EBD000073597 /* TaskTimeLine.swift in Sources */,
 				21D0CEF929F665F100073597 /* SegmentRow.swift in Sources */,
 				212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */,
 			);
