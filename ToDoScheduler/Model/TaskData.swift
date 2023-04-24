@@ -11,6 +11,8 @@ struct GlobalStoreData:Codable{
     //var taskCounter:Int=0
     var taskCounter:Int = 0
     var segmentCounter:Int = 0
+    var dayCounter: Int = 0
+    
     var workingDays:[Bool] = [Bool](repeating: false, count: 7)
     var workingHours:[[Bool]] = [[Bool]](repeating: [Bool](repeating: false, count: 48), count: 7)
     
@@ -45,40 +47,62 @@ final class Tasks: ObservableObject{
     
     // Add new task into tasklist, split it into segments and allocate them into days
     func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, desp:String=""){
-        globalStoreData.taskCounter += 1
-        var newTask = Taskstruct(taskname: taskName,deadline: deadline,estimatedCost: cost, granularity: gran, schedulePrefernece: schpre, description: desp)
+        print("try to add")
+        print("routinelist\(routinelist)")
+        let dateformatter1 = DateFormatter()
+        dateformatter1.dateFormat = "yyyy-MM-dd"
+        let dateformatter2 = DateFormatter()
+        dateformatter2.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let ddlStr = dateformatter2.string(from: deadline)
+        var newTask = Taskstruct(id: globalStoreData.taskCounter, taskname: taskName,deadline: ddlStr,estimatedCost: cost, granularity: gran, schedulePrefernece: schpre, description: desp)
         
         var segNum = cost/gran
+        var nextGran = cost - segNum*gran
         if gran*segNum<cost {
             segNum+=1
         }
         var haveCost = 0
-        var nextGran = gran
+        
+        print("segNum:\(segNum),cost:\(cost),nextGran:\(nextGran)")
         
         if schpre==1 { // schedule preference: as soon as possible
-            let dateformatter1 = DateFormatter()
-            dateformatter1.dateFormat = "yyyy-MM-dd"
-            let dateformatter2 = DateFormatter()
-            dateformatter2.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
             let today = Date()
             let startDayStr = dateformatter1.string(from: today)
             var startDay = dateformatter1.date(from: startDayStr)
             startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60))
             let endDayStr = dateformatter1.string(from: deadline)
-            var endDay = dateformatter1.date(from: endDayStr)
+            let endDay = dateformatter1.date(from: endDayStr)
             
             var iter_day = startDay
+            print("startDay:\(startDay!)")
             /* allocate segs to the days, from tomorrow to ddl */
             while true{
+                print("iter_day:\(iter_day!)")
                 let dateStr = dateformatter1.string(from:iter_day!)
+                print("dateStr:\(dateStr)")
                 var thisDay:Daystruct
                 if routinelist[dateStr] == nil{
-                    thisDay = Daystruct(date: iter_day!)
+                    print("is0")
+                    thisDay = Daystruct(id: globalStoreData.dayCounter, date: dateStr)
                     routinelist[dateStr] = thisDay
+                    globalStoreData.dayCounter += 1
                 }else{
+                    print("is1")
                     thisDay = routinelist[dateStr]!
                 }
+                
+                var checkCotSlot = 0
+                var checkCotSch = 0
+                for p in 0..<48 {
+                    if thisDay.timeSlot[p]{
+                        checkCotSlot += 1
+                    }
+                    if thisDay.schedule[p]{
+                        checkCotSch += 1
+                    }
+                }
+                print("checkCotSlot:\(checkCotSlot), checkCotSch:\(checkCotSch)")
                 
                 var cot:Int = 0
                 /* check if thisDay is allocatable, and how much segs can be allocated */
@@ -90,11 +114,12 @@ final class Tasks: ObservableObject{
                             for i in (p-gran+1)...p {
                                 thisDay.schedule[i] = true
                             }
-                            globalStoreData.segmentCounter += 1
-                            var newSegment = Segmentstruct(taskId: globalStoreData.taskCounter, day: iter_day!, startTime: p-gran+1, endTime: p)
+                            let theDayStr = dateformatter1.string(from: iter_day!)
+                            let newSegment = Segmentstruct(id: globalStoreData.segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-gran+1, endTime: p)
                             thisDay.segmentsId.append(globalStoreData.segmentCounter)
                             newTask.segmentsId.append(globalStoreData.segmentCounter)
                             segmentlist.append(newSegment)
+                            globalStoreData.segmentCounter += 1
                             
                             haveCost += nextGran
                             segNum -= 1
@@ -128,6 +153,7 @@ final class Tasks: ObservableObject{
         
         if segNum == 0 {
             tasklist.append(newTask)
+            globalStoreData.taskCounter += 1
             print("Successfully Allocated")
         }
         else {
@@ -135,6 +161,12 @@ final class Tasks: ObservableObject{
             // TODO: rollback operations
             // ...
         }
+    }
+    
+    func editSegment(segmentId:Int, day:Date, startTime:Int, endTime:Int)->Int{
+        // TODO: ...
+        // ...
+        return 0
     }
     
     func saveData(){
@@ -150,6 +182,7 @@ final class Tasks: ObservableObject{
 
 func load<T:Decodable>(_ filename:String)->T{
     let data: Data
+    print(filename)
     
     guard let file=Bundle.main.url(forResource: filename, withExtension: nil)
     else {

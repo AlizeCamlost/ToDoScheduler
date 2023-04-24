@@ -23,6 +23,7 @@
 		2160D07E298ED181001CB322 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160D07D298ED181001CB322 /* ContentView.swift */; };
 		2160D080298ED183001CB322 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2160D07F298ED183001CB322 /* Assets.xcassets */; };
 		2160D083298ED183001CB322 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2160D082298ED183001CB322 /* Preview Assets.xcassets */; };
+		21D0CEF929F665F100073597 /* SegmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0CEF829F665F100073597 /* SegmentRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		2160D07D298ED181001CB322 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2160D07F298ED183001CB322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2160D082298ED183001CB322 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		21D0CEF829F665F100073597 /* SegmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				212AEA4029DBA4B3006BF12E /* CalendarView.swift */,
 				2142B15029ED3E1F00365877 /* TaskRow.swift */,
 				2142B15229ED67E900365877 /* AddTask.swift */,
+				21D0CEF829F665F100073597 /* SegmentRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				2142B15329ED67E900365877 /* AddTask.swift in Sources */,
 				212AEA3F29DB9EE5006BF12E /* Segmentstruct.swift in Sources */,
 				2142B15129ED3E1F00365877 /* TaskRow.swift in Sources */,
+				21D0CEF929F665F100073597 /* SegmentRow.swift in Sources */,
 				212AEA3D29DB9D55006BF12E /* Taskstruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

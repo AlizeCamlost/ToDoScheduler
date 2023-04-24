@@ -8,8 +8,8 @@
 import Foundation
 
 struct Daystruct: Hashable, Codable, Identifiable{
-    var id = UUID()
-    var date: Date
+    var id: Int
+    var date: String
     
     var timeSlot: [Bool] = [Bool](repeating: false, count: 48)  // all available time, in half hour
     var schedule: [Bool] = [Bool](repeating: false, count: 48)  // occupied time, in half hour
