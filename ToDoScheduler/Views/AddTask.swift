@@ -13,6 +13,9 @@ struct AddTask: View {
     @State private var taskName: String = ""
     @State private var estimatedCost: String = ""
     @State private var selectDate = Date()
+    @State private var granularity: String = "2"
+    @State private var schedulePrefernece: String = "1"
+    @State private var desp: String = ""
     
     var body: some View {
         VStack {
@@ -22,8 +25,11 @@ struct AddTask: View {
             DatePicker(selection: $selectDate, in: Date()..., displayedComponents: [.date, .hourAndMinute]){
                 Text("Date")
             }
+            //TextField("Granularity",text: $granularity)
+            //TextField("SchedulePrefernece",text: $schedulePrefernece)
+            TextField("Description",text: $desp)
             Button(action:{
-                taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!)
+                taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!, desp: desp)
             }, label: {
                 Text("Click to Add")
             })

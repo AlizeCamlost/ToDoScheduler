@@ -14,11 +14,15 @@ struct CalendarView: View {
         taskData.tasklist
     }
     
+    var segmentlist:[Segmentstruct]{
+        taskData.segmentlist
+    }
+    
     var body: some View {
         VStack {
             List{
-                ForEach(tasklist){ task in
-                    TaskRow(task: task)
+                ForEach(segmentlist){ seg in
+                    SegmentRow(seg: seg)
                 }
             }
             Button(action: {
