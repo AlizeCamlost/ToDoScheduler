@@ -12,9 +12,9 @@ struct ContentView: View {
         TabView{
             VStack {
                 Text("The Calendar")
-//                CalendarView()
+                CalendarView()
 //                CalendarViewFromVC()
-                CView()
+//                CView()
             }
                 .font(.title)
                 .tabItem({
