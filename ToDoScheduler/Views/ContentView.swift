@@ -30,13 +30,12 @@ struct ContentView: View {
                     Text("Add New")
                 })
             .tag(1)
-            Text("Profile & Statistics & Settings")
-                .font(.title)
+            UserSettingView()
                 .tabItem({
                     Image(systemName: "gear")
                     Text("More")
                 })
-                .tag(2)
+            .tag(2)
         }
     }
 }

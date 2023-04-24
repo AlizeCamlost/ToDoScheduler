@@ -8,7 +8,10 @@
 import Foundation
 
 struct GlobalStoreData:Codable{
-    //var taskCounter:Int=0
+    var username: String = ""
+    var userAddress: String = ""
+    var userBirthday: String = ""
+    
     var taskCounter:Int = 0
     var segmentCounter:Int = 0
     var dayCounter: Int = 0
@@ -174,6 +177,12 @@ final class Tasks: ObservableObject{
         save(dir:"tasklistData.json", data:tasklist)
         save(dir:"segmentlistData.json", data: segmentlist)
         save(dir:"routinelistData.json", data:routinelist)
+    }
+    
+    func testprint(){
+        print(globalStoreData.username)
+        print(globalStoreData.userAddress)
+        print(globalStoreData.userBirthday)
     }
 }
 
