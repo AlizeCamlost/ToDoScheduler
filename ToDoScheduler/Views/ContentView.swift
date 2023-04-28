@@ -11,12 +11,9 @@ struct ContentView: View {
     var body: some View {
         TabView{
             VStack {
-                Text("The Calendar")
+                //Text("The Calendar")
                 CalendarView()
-//                CalendarViewFromVC()
-//                CView()
             }
-                .font(.title)
                 .tabItem({
                     Image(systemName: "calendar")
                     Text("Schedule")

@@ -5,6 +5,6 @@
     "estimatedCost":4,
     "granularity":2,
     "schedulePrefernece":1,
-    "description":"This is the first task, having two segments.",
+    "description":"Task is the first task, having two segments.",
     "segmentsId":[0,1]
 }]
