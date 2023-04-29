@@ -10,6 +10,7 @@ import SwiftUI
 struct CalendarView: View {
     //@State private var isRedrawClicked = false
     @EnvironmentObject var taskData: Tasks
+    @State private var localNotificationManager = LocalNotificationManager()
     
     private var gridItemLayout: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -57,7 +58,17 @@ struct CalendarView: View {
                             .foregroundColor(.orange.opacity(0.8))
                     }
                     Spacer()
+                }.toolbar{
+                    ToolbarItemGroup(placement: .navigationBarTrailing){
+                        Button(action: {
+                            localNotificationManager.scheduleNotificationForEvent(segmentlist: segmentlist, tasklist: tasklist)
+                        }) {
+                            Image(systemName: "bell.circle")
+                        }
+                    }
                 }
+                
+                
                 
                 LazyVGrid(columns: gridItemLayout) {
                     ForEach(daysOfWeek, id: \.self) { day in

@@ -161,8 +161,8 @@ final class Tasks: ObservableObject{
                     print("is0")
                     let wkd = weekdayid(from: iter_day!)
                     thisDay = Daystruct(id: modify_dayCounter, date: dateStr)
-                    if globalStoreData.workingDays[wkd]{
-                        thisDay.timeSlot = globalStoreData.workingHours[wkd]
+                    if globalStoreData.workingDays[wkd-1]{
+                        thisDay.timeSlot = globalStoreData.workingHours[wkd-1]
                     }
                     modify_dayCounter += 1
                 }else{
@@ -201,7 +201,96 @@ final class Tasks: ObservableObject{
                 if iter_day == endDay { break }  // out of time
                 iter_day = iter_day!.addingTimeInterval(TimeInterval(24*60*60))
             }
-        }else if schpre==2{
+        } else if schpre==2{
+            let today:Date = Date()
+            let startDayStr:String = dateformatter1.string(from: today)
+            var startDay:Date? = dateformatter1.date(from: startDayStr)
+            startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
+            let endDayStr:String = dateformatter1.string(from: deadline)
+            let endDay:Date? = dateformatter1.date(from: endDayStr)         // end at the ddl
+            
+            let calendar = Calendar.current
+            let diff:DateComponents = calendar.dateComponents([.day], from: startDay!, to: endDay!)
+            let periodNum = diff.day!+1
+            var tag_full = [Bool](repeating: false, count: periodNum)
+            var tag_poi = 0
+            
+            var iter_day:Date? = startDay
+            while true{
+                print("periodNum\(periodNum),tag_poi\(tag_poi)")
+                if !tag_full[tag_poi] {
+                    let dateStr:String = dateformatter1.string(from:iter_day!)
+                    var thisDay:Daystruct   // the unit in day_map
+                    if modify_day[dateStr] != nil {
+                        thisDay = modify_day[dateStr]!
+                    }else if routinelist[dateStr] != nil{
+                        thisDay = routinelist[dateStr]!
+                    }else{
+                        let wkd = weekdayid(from: iter_day!)
+                        thisDay = Daystruct(id: modify_dayCounter, date: dateStr)
+                        if globalStoreData.workingDays[wkd-1]{
+                            thisDay.timeSlot = globalStoreData.workingHours[wkd-1]
+                        }
+                        modify_dayCounter += 1
+                    }
+                    
+                    /* check if allocatable */
+                    var tag_full_i = true
+                    
+                    var cot:Int = 0
+                    for p in 0..<48 {
+                        if thisDay.timeSlot[p] && !thisDay.schedule[p] {
+                            cot += 1
+                            if cot == nextGran {
+                                for i in (p-gran+1)...p { thisDay.schedule[i] = true }
+                                let theDayStr = dateformatter1.string(from: iter_day!)
+                                let newSegment = Segmentstruct(id: modify_segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-nextGran+1, endTime: p)
+                                thisDay.segmentsId.append(modify_segmentCounter)
+                                modify_day[dateStr] = thisDay
+                                modify_segmentlist.append(newSegment)
+                                newTask.segmentsId.append(modify_segmentCounter)
+                                modify_segmentCounter += 1
+                                
+                                haveCost += nextGran
+                                segNum -= 1
+                                if segNum == 1 { nextGran = cost - haveCost }
+                                if segNum == 0 { break }  // allocate succeed
+                                cot = 0
+                                
+                                /* check: not full */
+                                tag_full_i = false
+                                
+                                break
+                            }
+                        }
+                        else{ cot = 0 }
+                    }
+                    
+                    if segNum == 0 { break }  // allocate succeed
+                    
+                    /* check: is full */
+                    if tag_full_i {
+                        tag_full[tag_poi] = true
+                        var checkall = true
+                        for ti in tag_full{
+                            if !ti {
+                                checkall = false
+                                break
+                            }
+                        }
+                        if checkall { break }   // no more space
+                    }
+                }
+                
+                if iter_day == endDay {
+                    iter_day = startDay
+                    tag_poi = 0
+                } else {
+                    iter_day = iter_day!.addingTimeInterval(TimeInterval(24*60*60))
+                    tag_poi += 1
+                }
+            }
+            
             
         }else if schpre==3{
             let startDayStr = dateformatter1.string(from: deadline)

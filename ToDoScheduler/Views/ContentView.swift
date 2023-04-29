@@ -20,13 +20,11 @@ struct ContentView: View {
                 })
                 .tag(0)
             VStack {
-                Text("New Task Info")
                 AddTask()
             }
-                .font(.title)
                 .tabItem({
                     Image(systemName: "calendar.badge.plus")
-                    Text("Add New")
+                    Text("Add New") 
                 })
             .tag(1)
             UserSettingView()

@@ -10,7 +10,8 @@ import SwiftUI
 struct CalendarCardView: View {
     var content:CalendarGridStruct
     @State private var isPresented = false
-    @State private var presentOption: Int?
+    @State private var presentOption: Int = 0
+    @State private var presentOption2: Int = 0
     @State private var segLayout:[Int] = []
     @State private var segEnabled:[Bool] = []
     @State private var segId:[Int] = []
@@ -61,9 +62,9 @@ struct CalendarCardView: View {
                             VStack{
                                 if segEnabled[slid] {
                                     Button(action:{
-                                        presentOption = slid
+                                        presentOption = segId[slid]
+                                        print("presentOption:\(presentOption)")
                                         isPresented.toggle()
-                                        print("presentOption:\(presentOption ?? -1)")
                                     }){
                                         VStack {
                                             HStack {
@@ -119,17 +120,16 @@ struct CalendarCardView: View {
                 segId.append(-1)
             }
             print(segLayout)
+            print(segId)
         }
         .sheet(isPresented: $isPresented, content: {
-            if let selected = presentOption{
-                SegmentCardView(detail: content.segDesc[segId[selected]])
-            }
+            SegmentCardView(detail: content.segDesc[presentOption])
         })
     }
 }
 
 struct SegmentCardView: View{
-    @State var detail:passingSegStruct
+    var detail:passingSegStruct
     
     var body: some View {
         VStack {
