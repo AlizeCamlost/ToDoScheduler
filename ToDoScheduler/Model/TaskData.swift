@@ -71,9 +71,15 @@ final class Tasks: ObservableObject{
     // view hold state
     var today = Date()
     var dayCalHold = Date()
-    //@Published var calenderGridList:[CalendarGridStruct] = []
     
-    func returnCalender()->[CalendarGridStruct]{
+    
+    public func weekdayid(from theDay:Date)->Int{
+        let calendar = Calendar.current
+        let weekday = calendar.dateComponents([.weekday], from: theDay).weekday
+        return weekday!
+    }
+    
+    public func returnCalender()->[CalendarGridStruct]{
         let calendar = Calendar.current
         let components = calendar.dateComponents(Set<Calendar.Component>([.year, .month]), from: dayCalHold)
         let startOfMonth = calendar.date(from: components)!
@@ -103,115 +109,96 @@ final class Tasks: ObservableObject{
                     theDay.addSegDesc(str: taskDesp, i1:sT, i2:eT)
                 }
             }
-            
             res.append(theDay)
         }
-        
-        print("Calendar:")
-        print(res)
-        
         return res
     }
     
-    
     // Add new task into tasklist, split it into segments and allocate them into days
-    func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, desp:String=""){
+    public func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, desp:String=""){
         print("try to add")
-        print("routinelist\(routinelist)")
         let dateformatter1 = DateFormatter()
         dateformatter1.dateFormat = "yyyy-MM-dd"
         let dateformatter2 = DateFormatter()
         dateformatter2.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        let ddlStr = dateformatter2.string(from: deadline)
+        let ddlStr:String = dateformatter2.string(from: deadline)
         var newTask = Taskstruct(id: globalStoreData.taskCounter, taskname: taskName,deadline: ddlStr,estimatedCost: cost, granularity: gran, schedulePrefernece: schpre, description: desp)
         
         var segNum = cost/gran
-        var nextGran = cost - segNum*gran
-        if gran*segNum<cost {
-            segNum+=1
+        var nextGran = gran
+        if gran*segNum < cost {
+            segNum += 1
+            if segNum == 1{
+                nextGran = cost
+            }
         }
         var haveCost = 0
         
-        print("segNum:\(segNum),cost:\(cost),nextGran:\(nextGran)")
+        print("segNum:\(segNum),cost:\(cost),lastGran:\(cost-gran*segNum)")
+        
+        var modify_day:[String:Daystruct] = [:]
+        var modify_segmentlist:[Segmentstruct] = []
+        var modify_dayCounter = globalStoreData.dayCounter
+        var modify_segmentCounter = globalStoreData.segmentCounter
         
         if schpre==1 { // schedule preference: as soon as possible
-            let today = Date()
-            let startDayStr = dateformatter1.string(from: today)
-            var startDay = dateformatter1.date(from: startDayStr)
-            startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60))
-            let endDayStr = dateformatter1.string(from: deadline)
-            let endDay = dateformatter1.date(from: endDayStr)
+            let today:Date = Date()
+            let startDayStr:String = dateformatter1.string(from: today)
+            var startDay:Date? = dateformatter1.date(from: startDayStr)
+            startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
+            let endDayStr:String = dateformatter1.string(from: deadline)
+            let endDay:Date? = dateformatter1.date(from: endDayStr)         // end at the ddl
             
-            var iter_day = startDay
+            var iter_day:Date? = startDay
             print("startDay:\(startDay!)")
             /* allocate segs to the days, from tomorrow to ddl */
-            while true{
-                print("iter_day:\(iter_day!)")
-                let dateStr = dateformatter1.string(from:iter_day!)
-                print("dateStr:\(dateStr)")
-                var thisDay:Daystruct
+            while true{     // while(iter_day <= endDay)
+                let dateStr:String = dateformatter1.string(from:iter_day!)  //print("iter_day:\(iter_day!),dateStr:\(dateStr)")
+                
+                var thisDay:Daystruct   // the unit in day_map
                 if routinelist[dateStr] == nil{
                     print("is0")
-                    thisDay = Daystruct(id: globalStoreData.dayCounter, date: dateStr)
-                    routinelist[dateStr] = thisDay
-                    globalStoreData.dayCounter += 1
+                    let wkd = weekdayid(from: iter_day!)
+                    thisDay = Daystruct(id: modify_dayCounter, date: dateStr)
+                    if globalStoreData.workingDays[wkd]{
+                        thisDay.timeSlot = globalStoreData.workingHours[wkd]
+                    }
+                    modify_dayCounter += 1
                 }else{
                     print("is1")
                     thisDay = routinelist[dateStr]!
                 }
-                
-                var checkCotSlot = 0
-                var checkCotSch = 0
-                for p in 0..<48 {
-                    if thisDay.timeSlot[p]{
-                        checkCotSlot += 1
-                    }
-                    if thisDay.schedule[p]{
-                        checkCotSch += 1
-                    }
-                }
-                print("checkCotSlot:\(checkCotSlot), checkCotSch:\(checkCotSch)")
                 
                 var cot:Int = 0
                 /* check if thisDay is allocatable, and how much segs can be allocated */
                 for p in 0..<48 {
                     if thisDay.timeSlot[p] && !thisDay.schedule[p] {
                         cot += 1
-                        if cot == gran {
+                        if cot == nextGran {
                             // TODO: allocate seg
-                            for i in (p-gran+1)...p {
-                                thisDay.schedule[i] = true
-                            }
+                            for i in (p-gran+1)...p { thisDay.schedule[i] = true }
                             let theDayStr = dateformatter1.string(from: iter_day!)
-                            let newSegment = Segmentstruct(id: globalStoreData.segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-gran+1, endTime: p)
-                            thisDay.segmentsId.append(globalStoreData.segmentCounter)
-                            newTask.segmentsId.append(globalStoreData.segmentCounter)
-                            segmentlist.append(newSegment)
-                            globalStoreData.segmentCounter += 1
+                            let newSegment = Segmentstruct(id: modify_segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-gran+1, endTime: p)
+                            thisDay.segmentsId.append(modify_segmentCounter)
+                            modify_day[dateStr] = thisDay
+                            modify_segmentlist.append(newSegment)
+                            newTask.segmentsId.append(modify_segmentCounter)
+                            modify_segmentCounter += 1
+                            
+                            print("newSegment:\(newSegment)")
                             
                             haveCost += nextGran
                             segNum -= 1
-                            if segNum == 1 {
-                                nextGran = cost - haveCost
-                            }
-                            if segNum == 0 {
-                                break   // allocate succeed
-                            }
-                            
+                            if segNum == 1 { nextGran = cost - haveCost }
+                            if segNum == 0 { break }  // allocate succeed
                             cot = 0
                         }
-                    }else{
-                        cot = 0
                     }
+                    else{ cot = 0 }
                 }
-                if segNum == 0 {
-                    break   // allocate succeed
-                }
-                
-                if iter_day == endDay {
-                    break   // out of time
-                }
+                if segNum == 0 { break }  // allocate succeed
+                if iter_day == endDay { break }  // out of time
                 iter_day = iter_day!.addingTimeInterval(TimeInterval(24*60*60))
             }
         }else if schpre==2{
@@ -223,14 +210,24 @@ final class Tasks: ObservableObject{
         if segNum == 0 {
             tasklist.append(newTask)
             globalStoreData.taskCounter += 1
+            
+            for (key, value) in modify_day{
+                routinelist[key] = value
+            }
+            for e in modify_segmentlist{
+                segmentlist.append(e)
+            }
+            globalStoreData.segmentCounter = modify_segmentCounter
+            globalStoreData.dayCounter = modify_dayCounter
+            
             print("Successfully Allocated")
         }
         else {
-            fatalError("No enough time! Allocating failed")
-            // TODO: rollback operations
-            // ...
+            print("No enough time! Allocating failed")
         }
     }
+    
+    
     
     func editSegment(segmentId:Int, day:Date, startTime:Int, endTime:Int)->Int{
         // TODO: ...
@@ -249,6 +246,7 @@ final class Tasks: ObservableObject{
         print(globalStoreData.username)
         print(globalStoreData.userAddress)
         print(globalStoreData.userBirthday)
+        print(globalStoreData.workingDays)
     }
 }
 
