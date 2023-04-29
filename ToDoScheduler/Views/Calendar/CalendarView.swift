@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct CalendarView: View {
+    //@State private var isRedrawClicked = false
     @EnvironmentObject var taskData: Tasks
     
-//  *************
-    private var symbols = ["keyboard", "hifispeaker.fill", "printer.fill", "tv.fill", "desktopcomputer", "headphones", "tv.music.note", "mic", "plus.bubble", "video"]
-    private var colors: [Color] = [.yellow, .purple, .green]
     private var gridItemLayout: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
-    
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    private let daysInMonth = 31
-// ***********
+    
+    let dateFmtTitle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM·YYYY"
+        return formatter
+    }()
     
     var tasklist:[Taskstruct]{
         taskData.tasklist
@@ -30,6 +31,34 @@ struct CalendarView: View {
     var body: some View {
         NavigationView{
             VStack {
+                HStack {
+                    Button(action: {
+                        print("before:\(taskData.dayCalHold)")
+                        let calendar = Calendar.current
+                        let previousMonth = calendar.date(byAdding: .month, value: -1, to: taskData.dayCalHold)!
+                        taskData.dayCalHold = previousMonth
+                        print("after:\(taskData.dayCalHold)")
+                        //isRedrawClicked.toggle()
+                    }){
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.orange.opacity(0.8))
+                    }
+                    Text(dateFmtTitle.string(from: taskData.dayCalHold))
+                        .font(.title)
+                    Button(action: {
+                        print("before:\(taskData.dayCalHold)")
+                        let calendar = Calendar.current
+                        let nextMonth = calendar.date(byAdding: .month, value: 1, to: taskData.dayCalHold)!
+                        taskData.dayCalHold = nextMonth
+                        print("after:\(taskData.dayCalHold)")
+                        //isRedrawClicked.toggle()
+                    }){
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.orange.opacity(0.8))
+                    }
+                    Spacer()
+                }
+                
                 LazyVGrid(columns: gridItemLayout) {
                     ForEach(daysOfWeek, id: \.self) { day in
                         Text(day)
@@ -42,15 +71,14 @@ struct CalendarView: View {
                     LazyVGrid(columns: gridItemLayout, spacing: 0) {
                         ForEach(taskData.returnCalender(), id:\.self){ cldst in
                             CalendarGrid(content: cldst)
-                                .frame(maxWidth: .infinity, idealHeight: 80)
+                                .frame(maxWidth: .infinity, idealHeight: 80, maxHeight: 80)
                                 //.border(Color.gray)
                         }
                     }
                     .padding()
-                    
                 }
-                
             }
+            .padding()
         }
     }
 }

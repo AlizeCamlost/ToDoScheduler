@@ -70,7 +70,7 @@ final class Tasks: ObservableObject{
     
     // view hold state
     var today = Date()
-    var dayCalHold = Date()
+    @Published var dayCalHold = Date()
     
     
     public func weekdayid(from theDay:Date)->Int{
@@ -179,7 +179,7 @@ final class Tasks: ObservableObject{
                             // TODO: allocate seg
                             for i in (p-gran+1)...p { thisDay.schedule[i] = true }
                             let theDayStr = dateformatter1.string(from: iter_day!)
-                            let newSegment = Segmentstruct(id: modify_segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-gran+1, endTime: p)
+                            let newSegment = Segmentstruct(id: modify_segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-nextGran+1, endTime: p)
                             thisDay.segmentsId.append(modify_segmentCounter)
                             modify_day[dateStr] = thisDay
                             modify_segmentlist.append(newSegment)
@@ -204,7 +204,54 @@ final class Tasks: ObservableObject{
         }else if schpre==2{
             
         }else if schpre==3{
+            let startDayStr = dateformatter1.string(from: deadline)
+            var startDay = dateformatter1.date(from:startDayStr)
+            startDay = startDay!.addingTimeInterval(TimeInterval(-24*60*60))
+            let endDayStr = dateformatter1.string(from:Date())
+            let endDay = dateformatter1.date(from:endDayStr)
             
+            var iter_day = startDay
+            while true{
+                let dateStr = dateformatter1.string(from:iter_day!)
+                var thisDay:Daystruct
+                if routinelist[dateStr] == nil{
+                    let wkd = weekdayid(from: iter_day!)
+                    thisDay = Daystruct(id: modify_dayCounter, date: dateStr)
+                    if globalStoreData.workingDays[wkd-1]{
+                        thisDay.timeSlot = globalStoreData.workingHours[wkd-1]
+                    }
+                    modify_dayCounter += 1
+                }else{
+                    thisDay = routinelist[dateStr]!
+                }
+                
+                var cot:Int = 0
+                for p in 0..<48 {
+                    if thisDay.timeSlot[p] && !thisDay.schedule[p] {
+                        cot += 1
+                        if cot == nextGran {
+                            for i in (p-gran+1)...p { thisDay.schedule[i] = true }
+                            let theDayStr = dateformatter1.string(from: iter_day!)
+                            let newSegment = Segmentstruct(id: modify_segmentCounter, taskId: globalStoreData.taskCounter, day: theDayStr, startTime: p-nextGran+1, endTime: p)
+                            thisDay.segmentsId.append(modify_segmentCounter)
+                            modify_day[dateStr] = thisDay
+                            modify_segmentlist.append(newSegment)
+                            newTask.segmentsId.append(modify_segmentCounter)
+                            modify_segmentCounter += 1
+                            
+                            haveCost += nextGran
+                            segNum -= 1
+                            if segNum == 1 { nextGran = cost - haveCost }
+                            if segNum == 0 { break }  // allocate succeed
+                            cot = 0
+                        }
+                    }
+                    else{ cot = 0 }
+                }
+                if segNum == 0 { break }  // allocate succeed
+                if iter_day == endDay { break }  // out of time
+                iter_day = iter_day!.addingTimeInterval(TimeInterval(-24*60*60))
+            }
         }
         
         if segNum == 0 {

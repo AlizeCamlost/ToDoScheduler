@@ -56,6 +56,7 @@ struct CalendarCardView: View {
                         }
                     }
                     VStack(spacing:0){
+                        VStack{}.frame(height:40)
                         ForEach(0..<segLayout.count, id:\.self){ slid in
                             VStack{
                                 if segEnabled[slid] {
@@ -76,6 +77,9 @@ struct CalendarCardView: View {
                                         .cornerRadius(5)
                                         .padding(3)
                                     }
+                                }else{
+                                    Rectangle()
+                                        .opacity(0)
                                 }
                             }
                             .frame(height: 40*CGFloat(segLayout[slid]))
@@ -88,6 +92,7 @@ struct CalendarCardView: View {
         }
         .padding()
         .onAppear{
+            print("content:\(content.segDesc)")
             var p = 0
             var q = -1
             for i in 0..<content.segDesc.count{
@@ -103,14 +108,17 @@ struct CalendarCardView: View {
                 segLayout.append(q-p+1)
                 segEnabled.append(true)
                 segId.append(i)
+                
+                p = q+1
             }
-            p = q+1
-            q = 47
+            //p = q+1
+            q = 48
             if p<=q {
                 segLayout.append(q-p+1)
                 segEnabled.append(false)
                 segId.append(-1)
             }
+            print(segLayout)
         }
         .sheet(isPresented: $isPresented, content: {
             if let selected = presentOption{

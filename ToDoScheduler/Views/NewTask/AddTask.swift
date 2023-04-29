@@ -13,8 +13,8 @@ struct AddTask: View {
     @State private var taskName: String = ""
     @State private var estimatedCost: String = ""
     @State private var selectDate = Date()
-    @State private var granularity: String = "2"
-    @State private var schedulePrefernece: String = "1"
+    @State private var granularity: String = ""
+    @State private var schedulePrefernece: String = ""
     @State private var desp: String = ""
     
     var body: some View {
@@ -24,13 +24,15 @@ struct AddTask: View {
                 TextField("TaskName",text: $taskName)
                 TextField("Estimated Time Cost",text: $estimatedCost)
                 DatePicker(selection: $selectDate, in: Date()..., displayedComponents: [.date, .hourAndMinute]){
-                    Text("Date")
+                    Text("Ddealine")
                 }
-                //TextField("Granularity",text: $granularity)
-                //TextField("SchedulePrefernece",text: $schedulePrefernece)
+                TextField("Granularity",text: $granularity)
+                TextField("SchedulePrefernece",text: $schedulePrefernece)
                 TextField("Description",text: $desp)
                 Button(action:{
-                    taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!, desp: desp)
+                    var gran = Int(granularity) ?? 2
+                    var schpre = Int(schedulePrefernece) ?? 1
+                    taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!, gran:gran, schpre:schpre, desp: desp)
                 }, label: {
                     Text("Click to Add")
                 })
