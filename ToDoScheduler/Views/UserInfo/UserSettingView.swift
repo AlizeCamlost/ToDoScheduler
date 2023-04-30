@@ -8,6 +8,8 @@ import SwiftUI
 
 struct UserSettingView: View {
     @EnvironmentObject var taskData: Tasks
+    @Environment(\.colorScheme) var colorScheme
+    //@Binding var sty:Bool
     
     @State private var name = ""
 
@@ -19,7 +21,7 @@ struct UserSettingView: View {
     @State private var birthday = Date()
     @State private var shouldShowImagePicker = false
     @State var image: UIImage?
-    @AppStorage("isDarkMode") private var isDark = false
+    //@AppStorage("isDarkMode") private var isDark = false
     @State var showWorkDayView = false
 
 //    @State var days: [String] = []
@@ -49,6 +51,7 @@ struct UserSettingView: View {
                 general
                 setting
                 //statistic
+                tasks
             }
             .navigationTitle("Account")
             .toolbar{
@@ -66,7 +69,7 @@ struct UserSettingView: View {
         .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
             ImagePicker(image: $image)
         }
-        .environment(\.colorScheme, isDark ? .dark : .light)
+        //.environment(\.colorScheme, sty ? .dark : .light)
 
     }
 }
@@ -119,20 +122,34 @@ private extension UserSettingView{
 
     var setting: some View{
         Section(header:Text("Settings")){
-            Toggle("Dark Mode", isOn: $isDark)
-            HStack{
-                Text("WorkDays")
+            //Toggle("Dark Mode", isOn: .constant(false))
+            VStack {
                 Spacer()
+                HStack{
+                    Text("WorkDays")
+                    Spacer()
 
+                    
+                    Image(systemName: "chevron.right")
+                        .opacity(0.5)
+                        .font(.system(size:14))
+
+                }
+                .onTapGesture {showWorkDayView = true}
+                .sheet(isPresented: $showWorkDayView){
+                    AddWorkDay()
+                }
                 
-                Image(systemName: "chevron.right")
-                    .opacity(0.5)
-                    .font(.system(size:14))
-
-            }
-            .onTapGesture {showWorkDayView = true}
-            .sheet(isPresented: $showWorkDayView){
-                AddWorkDay()
+                Spacer()
+                HStack{
+                    Text("Customized Rule")
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .opacity(0.5)
+                        .font(.system(size:14))
+                }
+                Spacer()
             }
             
 
@@ -186,6 +203,34 @@ struct ImagePicker: UIViewControllerRepresentable{
     
     }
 
+}
+
+private extension UserSettingView{
+    var tasks: some View{
+        List{
+            Section(header: Text("Task List")
+            ){
+                ForEach(taskData.tasklist){task in
+                    VStack {
+                        HStack {
+                            Text(task.taskname)
+                                .font(.system(size: 14))
+                                
+                            Spacer()
+                        }
+                        .padding(.bottom, 1)
+                        HStack {
+                            Text(task.description)
+                                .font(.system(size: 10))
+                                .foregroundColor(colorScheme == .dark ? Color.gray : Color.gray)
+                            Spacer()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 struct UserSettingView_Previews: PreviewProvider {

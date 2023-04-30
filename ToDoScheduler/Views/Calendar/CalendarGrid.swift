@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct CalendarGrid: View {
+    @Environment(\.colorScheme) var colorScheme
     var content:CalendarGridStruct
     
     let colorNumbers: [Color] = [
-            Color(UIColor(red: 0.490, green: 0.514, blue: 0.992, alpha: 1)),
-            Color(UIColor(red: 1.000, green: 0.557, blue: 0.431, alpha: 1)),
-            Color(UIColor(red: 0.647, green: 0.882, blue: 0.486, alpha: 1)),
-            Color(UIColor(red: 1.000, green: 0.871, blue: 0.255, alpha: 1)),
-            Color(UIColor(red: 0.443, green: 0.937, blue: 0.729, alpha: 1))
-        ]
+                Color(UIColor(red: 180/255, green: 206/255, blue: 234/255, alpha: 1)),
+                Color(UIColor(red: 142/255, green: 170/255, blue: 214/255, alpha: 1)),
+                Color(UIColor(red: 188/255, green: 146/255, blue: 201/255, alpha: 1)),
+                Color(UIColor(red: 94/255, green: 119/255, blue: 181/255, alpha: 1)),
+                Color(UIColor(red: 54/255, green: 88/255, blue: 164/255, alpha: 1)),
+                Color(UIColor(red: 21/255, green: 37/255, blue: 77/255, alpha: 1))
+            ]
     
     var body: some View {
         VStack{
@@ -24,21 +26,16 @@ struct CalendarGrid: View {
                 NavigationLink(destination: CalendarCardView(content: content)){
                     VStack(spacing:3){
                         Text(String(content.dayId))
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                             //.border(Color.gray)
                         ForEach(content.segDesc.prefix(4), id:\.self){ despStr in
-//                            Text(despStr.desp)
-//                                .font(.system(size: 12))
-//                                .foregroundColor(Color.black.opacity(0.6))
-//                                .background(Color.orange.opacity(0.4))
-//                                .padding(.bottom,1)
                             Color.clear
                                 .overlay(
                                     Text(despStr.tname)
-                                        .font(.system(size: 12))
-                                        .foregroundColor(Color.black.opacity(0.6))
+                                        .font(.system(size: 10))
+                                        .foregroundColor(Color.white)
                                 )
-                                .background(colorNumbers[despStr.imp].opacity(0.4))
+                                .background(colorNumbers[despStr.imp].opacity(0.8))
                                 .cornerRadius(5)
                                 .padding(0)
                         }

@@ -42,7 +42,7 @@ struct CalendarView: View {
                         //isRedrawClicked.toggle()
                     }){
                         Image(systemName: "chevron.left")
-                            .foregroundColor(.orange.opacity(0.8))
+                            .foregroundColor(.blue.opacity(0.8))
                     }
                     Text(dateFmtTitle.string(from: taskData.dayCalHold))
                         .font(.title)
@@ -55,7 +55,7 @@ struct CalendarView: View {
                         //isRedrawClicked.toggle()
                     }){
                         Image(systemName: "chevron.right")
-                            .foregroundColor(.orange.opacity(0.8))
+                            .foregroundColor(.blue.opacity(0.8))
                     }
                     Spacer()
                 }.toolbar{

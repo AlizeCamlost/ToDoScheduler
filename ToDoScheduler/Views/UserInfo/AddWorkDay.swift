@@ -74,7 +74,6 @@ struct AddWorkDay: View {
                                             isPresent2 = isPresent
                                         }
                                 })
-
                         }
                     }
                 }

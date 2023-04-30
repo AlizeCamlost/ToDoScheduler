@@ -13,10 +13,12 @@ struct AddTask: View {
     @State private var taskName: String = ""
     @State private var estimatedCost: String = ""
     @State private var selectDate = Date()
-    @State private var granularity: String = ""
-    @State private var schedulePreference: String = ""
+    @State private var granularity: String = "1h"
+    @State private var schedulePreference: String = "quick"
     @State private var desp: String = ""
     @State private var importance: Int = 1
+    @State private var showAllocationAlert = false
+    @State private var success = false
     
     let granularityOptions = ["30min", "1h", "2h", "4h"]
     let schedulePreferenceOptions = ["quick", "ordinary", "delay"]
@@ -35,6 +37,9 @@ struct AddTask: View {
                         HStack {
                             Text("Time Cost")
                             TextField("Estimated Time Cost",text: $estimatedCost)
+                            Text("×30mins")
+                                .font(.system(size:12))
+                                .opacity(0.6)
                         }
                         
                         HStack {
@@ -84,7 +89,16 @@ struct AddTask: View {
                             Button(action:{
                                 let gran = getGranularityValue()
                                 let schpre = getSchedulePreferenceValue()
-                                taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!, gran: gran, schpre: schpre, desp: desp)
+                                success = taskData.addTask(taskName: taskName, deadline: selectDate, cost: Int(estimatedCost)!, gran: gran, schpre: schpre, ipd: importance, desp: desp)
+                                
+                                //allocationSuccess = taskData.allocationSuccess ?? false
+                                showAllocationAlert = true
+                                taskName = ""
+                                estimatedCost = ""
+                                desp = ""
+                                granularity = "1h"
+                                schedulePreference = "quick"
+                                importance = 1
                             }, label: {
                                 Text("Click to Add")
                                     .font(.headline)
@@ -93,13 +107,23 @@ struct AddTask: View {
                                     .cornerRadius(8)
                             })
                             Spacer()
-                        }
+                        }.alert(isPresented: $showAllocationAlert, content: {
+                            showAlert(allocationSuccess: success)
+                        })
                     }
                     //.font(.system(size: 18))
                 }
             }
             .listStyle(GroupedListStyle()) // 设置列表样式为分组列表
             .navigationBarTitle("Add Task") // 设置导航栏标题
+        }
+    }
+    
+    func showAlert(allocationSuccess: Bool) -> Alert {
+        if allocationSuccess {
+            return Alert(title: Text("Success"), message: Text("Successfully Allocated"), dismissButton: .default(Text("OK")))
+        } else {
+            return Alert(title: Text("Failure"), message: Text("No enough time! Allocating failed"), dismissButton: .default(Text("OK")))
         }
     }
     

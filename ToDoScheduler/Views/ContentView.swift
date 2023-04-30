@@ -24,7 +24,7 @@ struct ContentView: View {
             }
                 .tabItem({
                     Image(systemName: "calendar.badge.plus")
-                    Text("Add New") 
+                    Text("Add New")
                 })
             .tag(1)
             UserSettingView()

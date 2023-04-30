@@ -119,7 +119,7 @@ final class Tasks: ObservableObject{
     }
     
     // Add new task into tasklist, split it into segments and allocate them into days
-    public func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, ipd:Int=1, desp:String=""){
+    public func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, ipd:Int=1, desp:String="")->Bool{
         print("try to add")
         let dateformatter1 = DateFormatter()
         dateformatter1.dateFormat = "yyyy-MM-dd"
@@ -150,7 +150,7 @@ final class Tasks: ObservableObject{
             let today:Date = Date()
             let startDayStr:String = dateformatter1.string(from: today)
             var startDay:Date? = dateformatter1.date(from: startDayStr)
-            startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
+            //startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
             let endDayStr:String = dateformatter1.string(from: deadline)
             let endDay:Date? = dateformatter1.date(from: endDayStr)         // end at the ddl
             
@@ -209,7 +209,7 @@ final class Tasks: ObservableObject{
             let today:Date = Date()
             let startDayStr:String = dateformatter1.string(from: today)
             var startDay:Date? = dateformatter1.date(from: startDayStr)
-            startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
+            //startDay = startDay!.addingTimeInterval(TimeInterval(24*60*60)) // start from tomorrow
             let endDayStr:String = dateformatter1.string(from: deadline)
             let endDay:Date? = dateformatter1.date(from: endDayStr)         // end at the ddl
             
@@ -299,7 +299,7 @@ final class Tasks: ObservableObject{
         }else if schpre==3{
             let startDayStr = dateformatter1.string(from: deadline)
             var startDay = dateformatter1.date(from:startDayStr)
-            startDay = startDay!.addingTimeInterval(TimeInterval(-24*60*60))
+            //startDay = startDay!.addingTimeInterval(TimeInterval(-24*60*60))
             let endDayStr = dateformatter1.string(from:Date())
             let endDay = dateformatter1.date(from:endDayStr)
             
@@ -360,9 +360,12 @@ final class Tasks: ObservableObject{
             globalStoreData.segmentCounter = modify_segmentCounter
             globalStoreData.dayCounter = modify_dayCounter
             
+            saveData()
+            return true
             print("Successfully Allocated")
         }
         else {
+            return false
             print("No enough time! Allocating failed")
         }
     }

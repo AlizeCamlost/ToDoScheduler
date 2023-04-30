@@ -17,12 +17,13 @@ struct CalendarCardView: View {
     @State private var segId:[Int] = []
     
     let colorNumbers: [Color] = [
-            Color(UIColor(red: 0.490, green: 0.514, blue: 0.992, alpha: 1)),
-            Color(UIColor(red: 1.000, green: 0.557, blue: 0.431, alpha: 1)),
-            Color(UIColor(red: 0.647, green: 0.882, blue: 0.486, alpha: 1)),
-            Color(UIColor(red: 1.000, green: 0.871, blue: 0.255, alpha: 1)),
-            Color(UIColor(red: 0.443, green: 0.937, blue: 0.729, alpha: 1))
-        ]
+                Color(UIColor(red: 180/255, green: 206/255, blue: 234/255, alpha: 1)),
+                Color(UIColor(red: 142/255, green: 170/255, blue: 214/255, alpha: 1)),
+                Color(UIColor(red: 118/255, green: 146/255, blue: 201/255, alpha: 1)),
+                Color(UIColor(red: 94/255, green: 119/255, blue: 181/255, alpha: 1)),
+                Color(UIColor(red: 54/255, green: 88/255, blue: 164/255, alpha: 1)),
+                Color(UIColor(red: 21/255, green: 37/255, blue: 77/255, alpha: 1))
+            ]
     
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -77,12 +78,12 @@ struct CalendarCardView: View {
                                         VStack {
                                             HStack {
                                                 Text(content.segDesc[segId[slid]].tname)
-                                                    .foregroundColor(.black)
+                                                    .foregroundColor(Color.white)
                                                 Spacer()
                                             }.padding(.leading, 5)
                                             Spacer()
                                         }
-                                        .background(colorNumbers[content.segDesc[segId[slid]].imp].opacity(0.4))
+                                        .background(colorNumbers[content.segDesc[segId[slid]].imp].opacity(0.8))
                                         .cornerRadius(5)
                                         .padding(3)
                                     }
