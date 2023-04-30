@@ -31,8 +31,12 @@ struct UserSettingView: View {
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd"
         let birthdayStr = dateformatter.string(from: birthday)
-        taskData.globalStoreData.username = name
-        taskData.globalStoreData.userAddress = address
+        if name != ""{
+            taskData.globalStoreData.username = name
+        }
+        if address != ""{
+            taskData.globalStoreData.userAddress = address
+        }
         taskData.globalStoreData.userBirthday = birthdayStr
         taskData.testprint()
         taskData.saveData()
@@ -44,7 +48,7 @@ struct UserSettingView: View {
             Form{
                 general
                 setting
-                statistic
+                //statistic
             }
             .navigationTitle("Account")
             .toolbar{
@@ -99,10 +103,13 @@ private extension UserSettingView{
                     TextField("name", text: $taskData.globalStoreData.username)
                 }
                 
-                
                 DatePicker("Birthdate", selection: $birthday, displayedComponents: .date)
-//                        Picker("Gender",selection: $Personal)
-                TextField("Address", text: $address)
+
+                if (taskData.globalStoreData.userAddress == ""){
+                    TextField("Enter your address", text: $address)
+                }else{
+                    TextField("name", text: $taskData.globalStoreData.userAddress)
+                }
             }
         }
     }
@@ -116,14 +123,6 @@ private extension UserSettingView{
             HStack{
                 Text("WorkDays")
                 Spacer()
-                
-//                if ((taskData.globalStoreData.workingDays[0] == true)&&(taskData.globalStoreData.workingDays[6]) ){
-//                    Text("Weekend").opacity(0.5)
-//                }else if(){
-//                    Text(d1).opacity(0.5)
-//                }else{
-//
-//                }
 
                 
                 Image(systemName: "chevron.right")
@@ -146,9 +145,9 @@ private extension UserSettingView{
         Section(header:Text("Settings")){
             HStack{
                 TextField("statistic 1", text: $t1)
-                
+
             }
-            
+
         }
     }
 }

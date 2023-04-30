@@ -1,10 +1,35 @@
-[{
-    "id":0,
-    "taskname":"task_01",
-    "deadline":"2023-04-30T18:00:00+0800",
-    "estimatedCost":4,
-    "granularity":2,
-    "schedulePrefernece":1,
-    "description":"Task is the first task, having two segments.",
-    "segmentsId":[0,1]
-}]
+[
+    {
+        "id":0,
+        "taskname":"Coursework Meeting",
+        "deadline":"2023-04-27T18:00:00+0800",
+        "estimatedCost":2,
+        "granularity":2,
+        "schedulePrefernece":1,
+        "importance":1,
+        "description":"Meeting for COMP7506 coursework.",
+        "segmentsId":[0]
+    },
+    {
+        "id":1,
+        "taskname":"Coding Assignment",
+        "deadline":"2023-04-30T18:00:00+0800",
+        "estimatedCost":4,
+        "granularity":2,
+        "schedulePrefernece":1,
+        "importance":2,
+        "description":"Coding Assignment Asdf ghjkl",
+        "segmentsId":[1,2]
+    },
+    {
+        "id":2,
+        "taskname":"Practise Handwriting",
+        "deadline":"2023-06-30T18:00:00+0800",
+        "estimatedCost":8,
+        "granularity":2,
+        "schedulePrefernece":2,
+        "importance":3,
+        "description":"Handwriting needs a lot of time to practise.",
+        "segmentsId":[3,4,5,6]
+    }
+]

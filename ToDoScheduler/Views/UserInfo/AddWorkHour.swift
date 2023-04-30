@@ -11,8 +11,9 @@ struct AddWorkHour: View {
     @EnvironmentObject var taskData: Tasks
     @State private var startTime = Date()
     @State private var endTime = Date()
-    @State private var globalStartTime = Date()
-    @State private var globalEndTime = Date()
+    @State private var startTime1 = Date()
+    @State private var endTime1 = Date()
+    @State private var testTime = Date()
     
     var daynum :Int
     @State var minterval: Int = 30
@@ -54,10 +55,25 @@ struct AddWorkHour: View {
                         Text(timeInterval)
                     }
                 }
-
                 
-                Section(header: Text("Add a Period")){
-                    if showAdditionalPickers{
+                
+                Section(header:Text("Choose a period to add"), footer: Text("这个section仅供测试,与addTime,deletTime,confirm, SortPeriod等后续函数无关.")){
+                    HStack {
+                        DatePicker("From", selection: $startTime, displayedComponents: .hourAndMinute)
+                        DatePicker("To", selection: $endTime, in: startTime..., displayedComponents: .hourAndMinute)
+                    }
+                }
+                    Section(header:Text("Choose a period to remove"), footer: Text("这个section仅供测试,与addTime,deletTime,confirm, SortPeriod等后续函数无关.")){
+                        HStack {
+                            DatePicker("From", selection: $startTime1, displayedComponents: .hourAndMinute)
+                            DatePicker("To", selection: $endTime1, in: startTime1..., displayedComponents: .hourAndMinute)
+                        }
+                }
+                
+
+
+                if showAdditionalPickers{
+                    Section(header: Text("Period Added")){
                         ForEach(additionalStartDates.indices, id: \.self) { index in
                             HStack {
                                 DatePicker("From", selection: $additionalStartDates[index], displayedComponents: .hourAndMinute)
@@ -65,6 +81,7 @@ struct AddWorkHour: View {
                             }
                         }
                     }
+                
                 }
             }
             .onAppear {UIDatePicker.appearance().minuteInterval = minterval}
@@ -72,19 +89,34 @@ struct AddWorkHour: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Confirm", action: {
-                        //                        presentationMode.wrappedValue.dismiss()
+                        presentationMode.wrappedValue.dismiss()
                         confirm()
                     })
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: {presentationMode.wrappedValue.dismiss()})
+                    Button("Exit", action: {presentationMode.wrappedValue.dismiss()})
                 }
                 
                 ToolbarItem(placement: .bottomBar){
-                    Button(action: {
-                        AddTime()
-                    }) {Text("Add")}
+                    HStack{
+                        Button(action: {
+//                            AddTime()
+                            let begintime = getHourAndMin(time: startTime)
+                            let endtime = getHourAndMin(time: endTime)
+
+                            taskData.globalStoreData.addWorkingHour(at: daynum, from: begintime.index, to: endtime.index)
+                        }) {Text("Add")}
+                        
+                        Spacer()
+                        Button(action: {
+//                            DeleteTime()
+                            let begintime = getHourAndMin(time: startTime1)
+                            let endtime = getHourAndMin(time: endTime1)
+
+                            taskData.globalStoreData.cutWorkingHour(at: daynum, from: begintime.index, to: endtime.index)
+                        }) {Text("Delete")}
+                    }
                 }
             }
         }
@@ -93,18 +125,31 @@ struct AddWorkHour: View {
     
     
     func confirm(){
-        //sort periods
-        SortPeriods()
-        //write in dataset
+        //plan:sort periods
         
-        let begintime = getHourAndMin(time: globalStartTime)
-        let endtime = getHourAndMin(time: globalEndTime)
-        print("......Start testing......")
-        print("begintime_index: \(begintime.index)")
-        print("endtime_index: \(endtime.index)")
-        taskData.globalStoreData.addWorkingHour(at: daynum, from: begintime.index, to: endtime.index)
-        print(taskData.globalStoreData.workingHours[daynum])
-        print("......End testing......")
+        //实现方式可以是传入additionalStartDates和additionalendDates这两个存储了所有添加过period的开始和结束时间
+        //之后进行整理并返回一个包含整理之后的period的数组
+//        SortPeriods()
+        //write in dataset
+        //这里可以用for each的方式来写入每一段独立的period进入taskData.globalStoreData.workingHours[daynum]
+        //之后检查confirm了之后，是否实时在上面的list中显示taskData.globalStoreData.workingHours[daynum]
+        
+        
+        //...丑陋的测试方法
+//        let begintime = getHourAndMin(time: startTime)
+//        let endtime = getHourAndMin(time: endTime)
+//        let begintime1 = getHourAndMin(time: startTime1)
+//        let endtime1 = getHourAndMin(time: endTime1)
+//        print("......Start testing......")
+//        print("begintime_index: \(begintime.index)")
+//        print("endtime_index: \(endtime.index)")
+//        print("begintime1_index: \(begintime1.index)")
+//        print("endtime1_index: \(endtime1.index)")
+//        taskData.globalStoreData.addWorkingHour(at: daynum, from: begintime.index, to: endtime.index)
+//        taskData.globalStoreData.cutWorkingHour(at: daynum, from: begintime1.index, to: endtime1.index)
+//        print(taskData.globalStoreData.workingHours[daynum])
+//        print("......End testing......")
+        //丑陋的测试方法......
         
     }
     
@@ -127,9 +172,18 @@ struct AddWorkHour: View {
         self.additionalStartDates.append(Date())
         self.additionalEndDates.append(Date())
         self.additionalDescription.append("")
-        //对begin time和end time判断
+        //对begin time和end time判断：如果end time < start time 则添加失败
         
     }
+    
+    //实现时可以参考AddTime()
+    func DeleteTime(){
+        //控制ui
+
+        //对begin time和end time判断：如果end time < start time 则添加失败
+        
+    }
+    
     
     private func getTimeIntervals() -> [String] {
         var timeIntervals = [String]()

@@ -16,6 +16,14 @@ struct CalendarCardView: View {
     @State private var segEnabled:[Bool] = []
     @State private var segId:[Int] = []
     
+    let colorNumbers: [Color] = [
+            Color(UIColor(red: 0.490, green: 0.514, blue: 0.992, alpha: 1)),
+            Color(UIColor(red: 1.000, green: 0.557, blue: 0.431, alpha: 1)),
+            Color(UIColor(red: 0.647, green: 0.882, blue: 0.486, alpha: 1)),
+            Color(UIColor(red: 1.000, green: 0.871, blue: 0.255, alpha: 1)),
+            Color(UIColor(red: 0.443, green: 0.937, blue: 0.729, alpha: 1))
+        ]
+    
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
@@ -68,13 +76,13 @@ struct CalendarCardView: View {
                                     }){
                                         VStack {
                                             HStack {
-                                                Text(content.segDesc[segId[slid]].desp)
+                                                Text(content.segDesc[segId[slid]].tname)
                                                     .foregroundColor(.black)
                                                 Spacer()
                                             }.padding(.leading, 5)
                                             Spacer()
                                         }
-                                        .background(.orange.opacity(0.4))
+                                        .background(colorNumbers[content.segDesc[segId[slid]].imp].opacity(0.4))
                                         .cornerRadius(5)
                                         .padding(3)
                                     }
@@ -132,14 +140,26 @@ struct SegmentCardView: View{
     var detail:passingSegStruct
     
     var body: some View {
-        VStack {
-            Text(detail.desp)
+        NavigationView{
+            VStack {
+                Text(detail.desp)
+                    .font(.system(size: 24))
+                    .padding()
+                Spacer()
+            }
+            .navigationTitle(Text(detail.tname))
+//            VStack {
+//                Text(detail.tname)
+//                Text(detail.desp)
+//            }
         }
+        
+
     }
 }
 
 struct CalendarCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarCardView(content:CalendarGridStruct(dayId: 13, segDesc: [passingSegStruct(desp:"asdf",startT:5,endT:10)]))
+        CalendarCardView(content:CalendarGridStruct(dayId: 13, segDesc: [passingSegStruct(tname:"tasdf",desp:"asdf",startT:5,endT:10,imp:1)]))
     }
 }

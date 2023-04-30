@@ -14,7 +14,7 @@ struct Taskstruct: Hashable, Codable, Identifiable{
     var estimatedCost: Int              // in half hours
     var granularity: Int = 2            // four levels(temporary), 1: half hour, 2: one hour, 4:two hours, 8: four hours
     var schedulePrefernece: Int = 1     // three tpyes(tmeporary), 1: as soon as possible, 2: averagely, 3: as late as possible
-    //var importance: Int
+    var importance: Int = 1             // 1...5
     var description: String = ""
     
     var segmentsId: [Int] = []

@@ -46,9 +46,11 @@ struct GlobalStoreData:Codable{
 }
 
 struct passingSegStruct:Hashable{
+    var tname:String
     var desp:String
     var startT:Int
     var endT:Int
+    var imp:Int
 }
 
 struct CalendarGridStruct:Hashable{
@@ -56,8 +58,8 @@ struct CalendarGridStruct:Hashable{
     var day:Date = Date()
     var segDesc:[passingSegStruct] = []
     
-    mutating func addSegDesc(str:String, i1:Int, i2:Int){
-        segDesc.append(passingSegStruct(desp: str, startT: i1, endT: i2))
+    mutating func addSegDesc(tstr:String, dstr:String, i1:Int, i2:Int, i3:Int){
+        segDesc.append(passingSegStruct(tname: tstr, desp: dstr, startT: i1, endT: i2, imp: i3))
     }
 }
 
@@ -103,10 +105,12 @@ final class Tasks: ObservableObject{
             if let rt = routinelist[theDay_Str] {
                 for sid in rt.segmentsId{
                     let tid = segmentlist[sid].taskId
+                    let taskname = tasklist[tid].taskname
                     let taskDesp = tasklist[tid].description
+                    let imp = tasklist[tid].importance
                     let sT = segmentlist[sid].startTime
                     let eT = segmentlist[sid].endTime
-                    theDay.addSegDesc(str: taskDesp, i1:sT, i2:eT)
+                    theDay.addSegDesc(tstr: taskname, dstr: taskDesp, i1:sT, i2:eT, i3:imp)
                 }
             }
             res.append(theDay)
@@ -115,7 +119,7 @@ final class Tasks: ObservableObject{
     }
     
     // Add new task into tasklist, split it into segments and allocate them into days
-    public func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, desp:String=""){
+    public func addTask(taskName: String, deadline: Date, cost:Int, gran:Int=2, schpre:Int=1, ipd:Int=1, desp:String=""){
         print("try to add")
         let dateformatter1 = DateFormatter()
         dateformatter1.dateFormat = "yyyy-MM-dd"
@@ -123,7 +127,7 @@ final class Tasks: ObservableObject{
         dateformatter2.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let ddlStr:String = dateformatter2.string(from: deadline)
-        var newTask = Taskstruct(id: globalStoreData.taskCounter, taskname: taskName,deadline: ddlStr,estimatedCost: cost, granularity: gran, schedulePrefernece: schpre, description: desp)
+        var newTask = Taskstruct(id: globalStoreData.taskCounter, taskname: taskName,deadline: ddlStr,estimatedCost: cost, granularity: gran, schedulePrefernece: schpre, importance: ipd, description: desp)
         
         var segNum = cost/gran
         var nextGran = gran

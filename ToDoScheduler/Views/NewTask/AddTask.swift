@@ -16,6 +16,7 @@ struct AddTask: View {
     @State private var granularity: String = ""
     @State private var schedulePreference: String = ""
     @State private var desp: String = ""
+    @State private var importance: Int = 1
     
     let granularityOptions = ["30min", "1h", "2h", "4h"]
     let schedulePreferenceOptions = ["quick", "ordinary", "delay"]
@@ -27,12 +28,12 @@ struct AddTask: View {
                     Section(header: Text("Input new task:")
                     ) {
                         HStack {
-                            Text("TaskName:")
+                            Text("TaskName")
                             TextField("TaskName",text: $taskName)
                         }
                         
                         HStack {
-                            Text("Estimated Time Cost:")
+                            Text("Time Cost")
                             TextField("Estimated Time Cost",text: $estimatedCost)
                         }
                         
@@ -40,10 +41,11 @@ struct AddTask: View {
                             DatePicker(selection: $selectDate, in: Date()..., displayedComponents: [.date, .hourAndMinute]){
                                 Text("Deadline")
                             }
+                            .onAppear {UIDatePicker.appearance().minuteInterval = 30}
                         }
                         
                         HStack {
-                            Text("Granularity:")
+                            Text("Granularity")
                             Picker("Granularity", selection: $granularity) {
                                 ForEach(granularityOptions, id: \.self) { option in
                                     Text(option)
@@ -53,7 +55,7 @@ struct AddTask: View {
                         }
                         
                         HStack {
-                            Text("Schedule Preference:")
+                            Text("Preference")
                             Picker("Schedule Preference", selection: $schedulePreference) {
                                 ForEach(schedulePreferenceOptions, id: \.self) { option in
                                     Text(option)
@@ -63,7 +65,17 @@ struct AddTask: View {
                         }
                         
                         HStack {
-                            Text("Description:")
+                            Text("Importance:")
+                            Picker("Importance", selection: $importance) {
+                                ForEach(1...5, id: \.self) { number in
+                                    Text("\(number)")
+                                }
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
+                        
+                        HStack {
+                            Text("Description")
                             TextField("Description",text: $desp)
                         }
                         
@@ -83,6 +95,7 @@ struct AddTask: View {
                             Spacer()
                         }
                     }
+                    //.font(.system(size: 18))
                 }
             }
             .listStyle(GroupedListStyle()) // 设置列表样式为分组列表
