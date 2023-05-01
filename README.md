@@ -10,12 +10,13 @@
 
 - Great for situations when ddls overstocking, or during final weeks, or anytime you find it difficult to appropriately arranging tasks and ensuring there being no conflicts
 
-![image-20230501160443911](README.assets/image-20230501160443911.png)
+<div align=center>
+<img src="README.assets/image-20230501160443911.png" alt="image-20230501160443911.png" width="900px" />
+</div>
 
-
-
-<img src="README.assets/image-20230501160526250.png" alt="image-20230501160526250" style="zoom:30%;" />
-
+<div align=center>
+<img src="README.assets/image-20230501160526250.png" alt="image-20230501160526250" width="600px" />
+</div>
 
 
 ## Environments
@@ -26,9 +27,7 @@
 
 ## Demonstration
 
-<div>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/du9SDzAqko8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+Youtube: [ToDoScheduler: an iOS app to help you Schedule your to-do list](https://youtu.be/du9SDzAqko8)
 
 ## Others
 
