@@ -19,7 +19,7 @@ struct CalendarCardView: View {
     let colorNumbers: [Color] = [
                 Color(UIColor(red: 180/255, green: 206/255, blue: 234/255, alpha: 1)),
                 Color(UIColor(red: 142/255, green: 170/255, blue: 214/255, alpha: 1)),
-                Color(UIColor(red: 118/255, green: 146/255, blue: 201/255, alpha: 1)),
+                Color(UIColor(red: 188/255, green: 146/255, blue: 201/255, alpha: 1)),
                 Color(UIColor(red: 94/255, green: 119/255, blue: 181/255, alpha: 1)),
                 Color(UIColor(red: 54/255, green: 88/255, blue: 164/255, alpha: 1)),
                 Color(UIColor(red: 21/255, green: 37/255, blue: 77/255, alpha: 1))

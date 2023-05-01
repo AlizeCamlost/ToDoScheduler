@@ -57,13 +57,13 @@ struct AddWorkHour: View {
                 }
                 
                 
-                Section(header:Text("Choose a period to add"), footer: Text("这个section仅供测试,与addTime,deletTime,confirm, SortPeriod等后续函数无关.")){
+                Section(header:Text("Choose a period to add")){
                     HStack {
                         DatePicker("From", selection: $startTime, displayedComponents: .hourAndMinute)
                         DatePicker("To", selection: $endTime, in: startTime..., displayedComponents: .hourAndMinute)
                     }
                 }
-                    Section(header:Text("Choose a period to remove"), footer: Text("这个section仅供测试,与addTime,deletTime,confirm, SortPeriod等后续函数无关.")){
+                    Section(header:Text("Choose a period to remove")){
                         HStack {
                             DatePicker("From", selection: $startTime1, displayedComponents: .hourAndMinute)
                             DatePicker("To", selection: $endTime1, in: startTime1..., displayedComponents: .hourAndMinute)
